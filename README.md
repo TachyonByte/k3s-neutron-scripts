@@ -102,19 +102,7 @@ This script removes all changes made by the test installation, including K3s ins
 <p>This script is for testing purposes only. Do not use this script in production environments. Always backup important data before running the script. The script may require sudo privileges for certain operations.</p>
 </details>
 
-<script>
-function showNote() {
-  const details = document.querySelectorAll('details');
-  details.forEach((detail) => {
-    detail.addEventListener('toggle', function() {
-      const summary = detail.querySelector('summary');
-      summary.innerHTML = summary.innerHTML.replace(/^([^\s]+).*/, function(match, p1) {
-        return p1 === 'Show' ? 'Hide' : 'Show';
-      });
-    });
-  });
-}
-</script></div>
+</div>
 
 ## Contributing
 
