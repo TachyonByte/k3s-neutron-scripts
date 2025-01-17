@@ -98,7 +98,7 @@ This script removes all changes made by the test installation, including K3s ins
 
 
 <div style="background-color:#318CE7; padding: 10px;"><details ontoggle="showNote()" open>
-<summary>Important Note</summary>
+<summary>❗️Important Note</summary>
 <p>This script is for testing purposes only. Do not use this script in production environments. Always backup important data before running the script. The script may require sudo privileges for certain operations.</p>
 </details>
 
