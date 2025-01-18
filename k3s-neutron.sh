@@ -13,7 +13,7 @@ if ! command -v figlet &> /dev/null; then
     if [ -f /etc/debian_version ]; then
         sudo apt-get update -qq && sudo apt-get install -y figlet -qq
     elif [ -f /etc/redhat-release ]; then
-        sudo yum install -y figlet
+        sudo dnf install -y figlet
     else
         exit 1
     fi
@@ -48,7 +48,7 @@ display_menu() {
     echo -e "${BLUE}_________________________________________${RESET}"
     echo -e "1. Host Setup"
     echo -e "2. Client Setup"
-    echo -e "3. Cleanup script"
+    echo -e "3. Cleanup Script"
     echo -e "4. Exit"
     echo -e "${BLUE}_________________________________________${RESET}"
     echo -e -n "${WHITE}Enter your choice [1-4]: ${RESET}"
@@ -56,9 +56,8 @@ display_menu() {
 
 # Call Host Script
 run_host_script() {
-    echo -e "${BLUE}Starting Host Setup...${RESET}"
+    echo -e "${BLUE}Step 1: Starting Host Setup...${RESET}"
     # Include the host script functions here
-    update_system
     install_k3s
     setup_kubectl_host
     refresh_bash
@@ -68,7 +67,6 @@ run_host_script() {
 run_client_script() {
     echo -e "${BLUE}Starting Client Setup...${RESET}"
     # Include the  client script function here
-    update_system
     setup_kubectl_client
     install_helm
     install_k9s
@@ -89,28 +87,7 @@ refresh_bash() {
 }
 
 #HOST SCRIPT
-# Update and Upgrade the System
-update_system() {
-    echo -e "${BLUE}Step 1: Updating and Upgrading the System...${RESET}"
 
-    if ! sudo -v; then
-        echo -e "${RED}✖ Unable to proceed. This step requires sudo privileges.${RESET}"
-        exit 1
-    fi
-
-    if [ -f /etc/debian_version ]; then
-        echo -e "${WHITE}Detected Debian-based system. Running updates...${RESET}"
-        sudo apt-get update -qq > /dev/null && sudo apt-get upgrade -y -qq > /dev/null
-    elif [ -f /etc/redhat-release ]; then
-        echo -e "${WHITE}Detected RHEL-based system. Running updates...${RESET}"
-        sudo yum update -y -q > /dev/null && sudo yum upgrade -y -q > /dev/null
-    else
-        echo -e "${RED}✖ Unsupported operating system. Exiting.${RESET}"
-        exit 1
-    fi
-
-    echo -e "${GREEN}✔ System update and upgrade completed successfully!${RESET}"
-}
 
 # Install K3s
 install_k3s() {
